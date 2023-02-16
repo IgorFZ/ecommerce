@@ -7,6 +7,7 @@ const state = {
     user: {
         id: null,
         email: null,
+        full_name: null,
     },
 }
 
@@ -20,6 +21,9 @@ const getters = {
     getUserID(state) {
         return state.user?.id;
     },
+    getUserName(state) {
+      return state.user?.full_name;
+  },
     isLoggedIn(state) {
         const loggedOut = state.auth_token == null || state.auth_token == JSON.stringify(null);
         return !loggedOut;
@@ -42,7 +46,19 @@ const actions = {
             });
         });
     },
-
+    editUserInfo({ commit }, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .put(`${BASE_URL}users/${payload.id}`, payload)
+          .then((response) => {
+            commit("setUserInfoFromToken", response);
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
     loginUser({ commit }, payload) {
         new Promise((resolve, reject) => {
             axios
@@ -110,6 +126,7 @@ const mutations = {
         state.user = {
           id: null,
           email: null,
+          full_name: null,
         };
         state.auth_token = null;
         localStorage.removeItem("auth_token");

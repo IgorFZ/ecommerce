@@ -3,6 +3,7 @@ import Home from '../components/pages/HomePage.vue'
 
 import Login from '../components/devise/session/Login.vue'
 import SignUp from '../components/devise/registration/SignUp.vue'
+import Edit from '../components/devise/registration/Edit.vue'
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -10,6 +11,8 @@ const routes = [
     { path: '/login', name: 'Login', component: Login },
 
     { path: '/sign_up', name: 'Sign Up', component: SignUp },
+    
+    { path: '/edit', name: 'Edit', component: Edit },
 ]
 
 const router = createRouter({

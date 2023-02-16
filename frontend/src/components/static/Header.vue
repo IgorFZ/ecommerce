@@ -9,7 +9,7 @@
                 <li><router-link :class="{'active': currentRouteName == 'About'}" to="/about">About</router-link></li>
                 <li><router-link :class="{'active': currentRouteName == 'Contact'}" to="/contact">Contact</router-link></li>
                 <div v-if="isLoggedIn" class="dropdown">
-                    <li><router-link class="dropbtn" to="/">Hello, {{ (this.getUserEmail) }}</router-link></li>
+                    <li><router-link class="dropbtn" to="/">Hello, {{ (this.getUserName).split(' ')[0] }}</router-link></li>
                     <div class="dropdown-content">
                         <router-link to="/edit">
                             <i class="fas fa-user-edit"></i>
