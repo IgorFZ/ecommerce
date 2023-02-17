@@ -27,6 +27,7 @@ const actions = {
                 name: payload['name'],
                 mode: payload['mode'],
                 direction: payload['direction'],
+                limit: payload['limit'],
             }
         }
         new Promise((resolve, reject) => {

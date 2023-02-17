@@ -42,6 +42,7 @@ export default {
     name: 'Shopping',
     props: {
         filterActive: Boolean,
+        limit: Number,
     },
     data(){
         return {
@@ -69,6 +70,7 @@ export default {
         var data = {
             mode: 'stars' ,
             direction: 'desc',
+            limit: this.limit,
         }
         this.getAllProducts(data);
     }

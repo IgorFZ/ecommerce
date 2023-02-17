@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.all.limit(params[:limit])
     @products = @products.where('name ilike ?', "%#{params[:name]}%") if params[:name].present?
     @products = @products.order("#{params[:mode]}": :"#{params[:direction]}") if params[:mode].present?
   

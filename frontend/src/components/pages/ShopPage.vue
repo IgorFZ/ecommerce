@@ -4,7 +4,7 @@
             <h2>#stayhome</h2>
             <p>Save more with coupons & up to 70% off!</p>
         </section>
-        <Shopping :filterActive="true" />
+        <Shopping :filterActive="true" :limit='16'/>
     </div>
 </template>
 

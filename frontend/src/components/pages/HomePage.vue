@@ -2,9 +2,9 @@
     <div>
         <Hero />
         <Feature />
-        <Shopping :filterActive="false" />
+        <Shopping :filterActive="false" :limit='8'/>
         <Banner />
-        <Shopping />
+        <Shopping :filterActive="false" :limit='8'/>
         <SummerBanner />
         <TripleBanner />
     </div>
