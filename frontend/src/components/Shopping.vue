@@ -18,7 +18,7 @@
                             <i v-if="n > product['stars']" class="fas fa-star" id="gray"></i>
                         </div>
                     </div>
-                    <h4>${{ product['price']/100.0 }}</h4>
+                    <h4>${{ formatNumber(product['price']/100) }}</h4>
                 </div>
                 <router-link :to="{ name: 'Product', params: { id: product.id, category_id: product.category_id }}">
                     <i class="fal fa-shopping-cart cart"></i>
@@ -63,6 +63,9 @@ export default {
                 direction: searchValue.direction,
             }
             this.getAllProducts(data);
+        },
+        formatNumber (num) {
+            return parseFloat(num).toFixed(2)
         },
     },
     mounted() {

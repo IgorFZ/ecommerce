@@ -1,10 +1,11 @@
 <template lang="">
     <section v-if="(getProduct['image_url'] != null || getProduct['image_url'] != undefined)" id="prodetails" class="section-p1">
         <div class="single-pro-image">
-            <img :src="getProduct['image_url'][0]" style="width: 100%" id="MainImg" alt="">
+            <img :src="mainImg" style="width: 100%" id="MainImg" alt="">
             <div class="small-img-group">
                 <div :class="{'small-img-col-first': index == 0, 'small-img-col': index > 0}" v-for="(image, index) in getProduct['image_url']">
-                    <img :src="getProduct['image_url'][index]" style="width: 100%" class="small-img" alt="">
+                    <img :src="getProduct['image_url'][index]" style="width: 100%" class="small-img" alt=""
+                    @click.prevent="loadImage(index)">
                 </div>
             </div>
         </div>
@@ -13,7 +14,7 @@
             <h4> {{ getProduct['name'] }} </h4>
             <span class="brand"> {{ getProduct['brand'] }} </span>
             <Stars :stars="getProduct['stars']" />
-            <h2>${{ getProduct['price'] }} </h2>
+            <h2>${{ formatNumber(getProduct['price']/100) }} </h2>
             <select>
                 <option value="">Select Size</option>
                 <option value="">XL</option>
@@ -37,6 +38,12 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'Product',
     props: ["id", "category_id"],
+    data() {
+        return {
+            mainImg: null,
+            imgIndex: 0,
+        }
+    },
     components: {
         Stars,
     },
@@ -45,13 +52,20 @@ export default {
     },
     methods: {
         ...mapActions(["getProductById", "getCategoryById"]),
-        changeImage() {
-
-        }
+        loadImage(index) {
+            this.imgIndex = index
+            this.mainImg = this.getProduct['image_url'][index]
+        },
+        formatNumber (num) {
+            return parseFloat(num).toFixed(2)
+        },
     },
     mounted() {
         this.getProductById(this.id);
         this.getCategoryById(this.category_id);
+    },
+    updated() {
+        this.loadImage(this.imgIndex)
     }
 }
 </script>
