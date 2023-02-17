@@ -22,8 +22,8 @@
                 <option value="">Small</option>
                 <option value="">Large</option>
             </select>
-            <input type="number" value="1">
-            <button class="normal">Add To Cart</button>
+            <input type="number" v-model="quantity">
+            <button @click="addToCart()" class="normal">Add To Cart</button>
             <h4>Product Details</h4>
             <span> {{ getProduct['desc'] }} </span>
         </div>
@@ -42,22 +42,37 @@ export default {
         return {
             mainImg: null,
             imgIndex: 0,
+            quantity: 1,
+            params: {},
         }
     },
     components: {
         Stars,
     },
     computed: {
-        ...mapGetters(["getProduct", "getCategory"]),
+        ...mapGetters(["getProduct", "getCategory", "isLoggedIn", "getUserID"]),
     },
     methods: {
-        ...mapActions(["getProductById", "getCategoryById"]),
+        ...mapActions(["getProductById", "getCategoryById", "addProductToCart"]),
         loadImage(index) {
             this.imgIndex = index
             this.mainImg = this.getProduct['image_url'][index]
         },
         formatNumber (num) {
             return parseFloat(num).toFixed(2)
+        },
+        addToCart() {
+            if (this.isLoggedIn) {
+                this.params = {
+                    user_id: this.getUserID,
+                    product_id: this.getProduct['id'],
+                    quantity: this.quantity,
+                }
+                console.log(this.params)
+                this.addProductToCart(this.params)
+            } else {
+                this.$router.push({ name: 'Login' })
+            }
         },
     },
     mounted() {

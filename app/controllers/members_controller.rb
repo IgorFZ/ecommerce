@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
     before_action :authenticate_user!
 
-    def show
+    def current_user
         user = get_user_from_token
         if (user == 'null' || user == 'undefined')
             render json: {
