@@ -4,6 +4,8 @@ import Blog from '../components/pages/BlogPage.vue'
 import Post from '../components/pages/PostPage.vue'
 import Shop from '../components/pages/ShopPage.vue'
 import Product from '../components/pages/ProductPage.vue'
+import About from '../components/pages/AboutPage.vue'
+import Contact from '../components/pages/ContactPage.vue'
 
 import Login from '../components/devise/session/Login.vue'
 import SignUp from '../components/devise/registration/SignUp.vue'
@@ -25,6 +27,10 @@ const routes = [
     { path: '/shop', name: 'Shop', component: Shop },
 
     { path: '/product/:id/:category_id', name: 'Product', component: Product, props: true },
+
+    { path: '/about', name: 'About', component: About },
+
+    { path: '/contact', name: 'Contact', component: Contact },
 ]
 
 const router = createRouter({
