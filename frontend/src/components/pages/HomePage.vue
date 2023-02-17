@@ -2,7 +2,7 @@
     <div>
         <Hero />
         <Feature />
-        <!-- <Shopping :filterActive="false" /> -->
+        <Shopping :filterActive="false" />
         <Banner />
         <Shopping />
         <SummerBanner />
@@ -14,7 +14,7 @@
 <script>
 import Hero from '../banners/Hero.vue';
 import Feature from '../banners/Feature.vue';
-// import Shopping from '../Shopping.vue';
+import Shopping from '../Shopping.vue';
 import Banner from '../banners/Banner.vue';
 import SummerBanner from '../banners/SummerBanner.vue';
 import TripleBanner from '../banners/TripleBanner.vue';
@@ -24,7 +24,7 @@ export default {
     components: {
         Hero,
         Feature,
-        // Shopping,
+        Shopping,
         Banner,
         SummerBanner,
         TripleBanner,

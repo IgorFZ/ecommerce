@@ -27,7 +27,7 @@
                 </div>
                 <li id="lg-bag"> 
                     <router-link to="/cart">
-                        <i class="fa-solid fa-bag-shopping"></i> 
+                        <i class="far fa-shopping-bag"></i>
                     </router-link>
                 </li>
                 <a href="#" id="close" @click="nav" class="fas fa-times"></a>

@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/pages/HomePage.vue'
 import Blog from '../components/pages/BlogPage.vue'
 import Post from '../components/pages/PostPage.vue'
+import Shop from '../components/pages/ShopPage.vue'
+import Product from '../components/pages/ProductPage.vue'
 
 import Login from '../components/devise/session/Login.vue'
 import SignUp from '../components/devise/registration/SignUp.vue'
@@ -19,6 +21,10 @@ const routes = [
     { path: '/blog', name: 'Blog', component: Blog },
 
     { path: '/post/:id', name: 'Post', component: Post },
+
+    { path: '/shop', name: 'Shop', component: Shop },
+
+    { path: '/product/:id/:category_id', name: 'Product', component: Product, props: true },
 ]
 
 const router = createRouter({
