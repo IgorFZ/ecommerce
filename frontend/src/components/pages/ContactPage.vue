@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div>
         <section id="page-header" class="about-header">
         <h2>#let's_talk</h2>
