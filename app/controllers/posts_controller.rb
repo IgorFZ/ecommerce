@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @posts = @posts.where('title ilike ?', "%#{params[:title]}%") if params[:title].present?
-    # @posts = @posts.order("#{params[:created_at]} #{params[:direction]}")
+    @posts = @posts.order('created_at': :"#{params[:direction]}")
   
     @posts = @posts.map { |post| 
       post = PostSerializer.new(post).serializable_hash[:data][:attributes]

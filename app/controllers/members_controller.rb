@@ -32,8 +32,6 @@ class MembersController < ApplicationController
             }, status: :unprocessable_entity
         end
     end
-
-    
   
     private
   

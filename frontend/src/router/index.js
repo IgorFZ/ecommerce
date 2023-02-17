@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/pages/HomePage.vue'
+import Blog from '../components/pages/BlogPage.vue'
+import Post from '../components/pages/PostPage.vue'
 
 import Login from '../components/devise/session/Login.vue'
 import SignUp from '../components/devise/registration/SignUp.vue'
@@ -13,6 +15,10 @@ const routes = [
     { path: '/sign_up', name: 'Sign Up', component: SignUp },
     
     { path: '/edit', name: 'Edit', component: Edit },
+
+    { path: '/blog', name: 'Blog', component: Blog },
+
+    { path: '/post/:id', name: 'Post', component: Post },
 ]
 
 const router = createRouter({

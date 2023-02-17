@@ -7,6 +7,5 @@ Rails.application.routes.draw do
                registrations: 'users/registrations'
              }
   get '/member-data', to: 'members#show'
-  put '/member-edit', to: 'members#update'
   put '/users/:id', to: 'members#update_info'
 end
