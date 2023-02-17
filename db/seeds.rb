@@ -6,30 +6,21 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-post = Post.create(title: "Must-Have Skater Girl Iten", content: "Lorem ipsum dolor sit amet, 
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Neque volutpat ac tincidunt vitae semper quis lectus nulla. Congue mauris rhoncus aenean vel 
-        elit scelerisque mauris. Faucibus scelerisque eleifend donec pretium. Quis lectus nulla at volutpat. 
-        Vel elit scelerisque mauris pellentesque. Nulla facilisi cras fermentum odio eu. 
-        Lacus suspendisse faucibus interdum posuere lorem. Eget aliquet nibh praesent tristique magna sit amet purus. 
-        Non nisi est sit amet facilisis magna etiam tempor. Diam quis enim lobortis scelerisque fermentum dui.")
-post.image.attach(io: File.open(Rails.root.join('frontend/src/assets/img/blog/b3.jpg')), filename: "b3.jpg")
+product = Product.create(
+        name: "Women's Cartoon Astrounaut T-Shirts", 
+        desc: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+        Ratione, sit magnam? At quod sapiente nihil delectus suscipit consequuntur nulla neque fuga rerum! 
+        Debitis repellendus quo maxime rerum, asperiores harum minus!", 
+        price: 13900, 
+        stock: 999, 
+        category_id: 3, 
+        brand: "Adidas",
+        stars: 5,
+        )
+product.images.attach(io: File.open(Rails.root.join('frontend/src/assets/img/products/f1.jpg')), filename: "f1.jpg")
+product.images.attach(io: File.open(Rails.root.join('frontend/src/assets/img/products/f2.jpg')), filename: "f2.jpg")
+product.images.attach(io: File.open(Rails.root.join('frontend/src/assets/img/products/f3.jpg')), filename: "f3.jpg")
+product.images.attach(io: File.open(Rails.root.join('frontend/src/assets/img/products/f4.jpg')), filename: "f4.jpg")
+product.images.attach(io: File.open(Rails.root.join('frontend/src/assets/img/products/f5.jpg')), filename: "f5.jpg")
 
-post = Post.create(title: "How to Style a Quiff", content: "Lorem ipsum dolor sit amet, 
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Neque volutpat ac tincidunt vitae semper quis lectus nulla. Congue mauris rhoncus aenean vel 
-        elit scelerisque mauris. Faucibus scelerisque eleifend donec pretium. Quis lectus nulla at volutpat. 
-        Vel elit scelerisque mauris pellentesque. Nulla facilisi cras fermentum odio eu. 
-        Lacus suspendisse faucibus interdum posuere lorem. Eget aliquet nibh praesent tristique magna sit amet purus. 
-        Non nisi est sit amet facilisis magna etiam tempor. Diam quis enim lobortis scelerisque fermentum dui.")
-post.image.attach(io: File.open(Rails.root.join('frontend/src/assets/img/blog/b2.jpg')), filename: "b2.jpg")
-
-post = Post.create(title: "The Cotton-Jersey Zip-Up Hoodie", content: "Lorem ipsum dolor sit amet, 
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Neque volutpat ac tincidunt vitae semper quis lectus nulla. Congue mauris rhoncus aenean vel 
-        elit scelerisque mauris. Faucibus scelerisque eleifend donec pretium. Quis lectus nulla at volutpat. 
-        Vel elit scelerisque mauris pellentesque. Nulla facilisi cras fermentum odio eu. 
-        Lacus suspendisse faucibus interdum posuere lorem. Eget aliquet nibh praesent tristique magna sit amet purus. 
-        Non nisi est sit amet facilisis magna etiam tempor. Diam quis enim lobortis scelerisque fermentum dui.")
-post.image.attach(io: File.open(Rails.root.join('frontend/src/assets/img/blog/b1.jpg')), filename: "b1.jpg")
 

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :posts
+  resources :products
   resources :categories
   devise_for :users,
              controllers: {
