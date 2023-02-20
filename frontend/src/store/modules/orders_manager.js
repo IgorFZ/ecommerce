@@ -3,13 +3,12 @@ import axios from 'axios';
 const BASE_URL = "http://127.0.0.1:3000/order"
 
 const state = {
-    order: []
+    cart: []
 }
 
 const getters = {
-    getOrder(state) {
-        console.log(state.order)
-        return state.order;
+    getCart(state) {
+        return state.cart;
     },
 }
 
@@ -22,7 +21,20 @@ const actions = {
             axios
             .get(`${BASE_URL}`, config)
             .then((response) => {
-                commit("setPost", response);
+                commit("", response);
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+        });
+    },
+    getCartOrder({ commit }, payload) {
+        new Promise((resolve, reject) => {
+            axios
+            .get(`${BASE_URL}/${payload}`)
+            .then((response) => {
+                commit("setCart", response);
                 resolve(response.data);
             })
             .catch((error) => {
@@ -33,11 +45,8 @@ const actions = {
 }
 
 const mutations = {
-    setPosts(state, data) {
-        state.posts = data.data;
-    },
-    setPost(state, data) {
-        state.post = data.data;
+    setCart(state, data) {
+        state.cart = data.data;
     },
 }
 

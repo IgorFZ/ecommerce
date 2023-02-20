@@ -14,7 +14,7 @@
             <h4> {{ getProduct['name'] }} </h4>
             <span class="brand"> {{ getProduct['brand'] }} </span>
             <Stars :stars="getProduct['stars']" />
-            <h2>${{ formatNumber(getProduct['price']/100) }} </h2>
+            <h2>${{ formatNumber(getProduct['price']) }} </h2>
             <select>
                 <option value="">Select Size</option>
                 <option value="">XL</option>
@@ -53,13 +53,13 @@ export default {
         ...mapGetters(["getProduct", "getCategory", "isLoggedIn", "getUserID"]),
     },
     methods: {
-        ...mapActions(["getProductById", "getCategoryById", "addProductToCart"]),
+        ...mapActions(["getProductById", "getCategoryById", "addProductToCart", "getCartOrder"]),
         loadImage(index) {
             this.imgIndex = index
             this.mainImg = this.getProduct['image_url'][index]
         },
         formatNumber (num) {
-            return parseFloat(num).toFixed(2)
+            return parseFloat(num/100).toFixed(2)
         },
         addToCart() {
             if (this.isLoggedIn) {

@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   put '/users/:id', to: 'members#update_info'
 
   get '/order', to: 'orders#add_to_cart'
+  get '/order/:user_id', to: 'orders#get_user_cart'
 end

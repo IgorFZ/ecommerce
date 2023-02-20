@@ -9,27 +9,29 @@
                 <li><router-link :class="{'active': currentRouteName == 'About'}" to="/about">About</router-link></li>
                 <li><router-link :class="{'active': currentRouteName == 'Contact'}" to="/contact">Contact</router-link></li>
                 <div v-if="isLoggedIn" class="dropdown">
-                    <li><router-link class="dropbtn" to="/">Hello, {{ (this.getUserName).split(' ')[0] }}</router-link></li>
-                    <div class="dropdown-content">
-                        <router-link to="/edit">
-                            <i class="fas fa-user-edit"></i>
-                            <span>Edit Account</span>
-                        </router-link>
-                        <router-link to="/">
-                            <i class="far fa-times-circle"></i>
-                            <span @click="logoutUser" >Logout</span>
-                        </router-link>
+                    <div>
+                        <li><router-link class="dropbtn" to="/">Hello, {{ (this.getUserName).split(' ')[0] }}</router-link></li>
+                        <div class="dropdown-content">
+                            <router-link to="/edit">
+                                <i class="fas fa-user-edit"></i>
+                                <span>Edit Account</span>
+                            </router-link>
+                            <router-link to="/">
+                                <i class="far fa-times-circle"></i>
+                                <span @click="logoutUser" >Logout</span>
+                            </router-link>
+                        </div>
                     </div>
+                    <li id="lg-bag"> 
+                        <router-link to="/cart">
+                            <i class="far fa-shopping-bag"></i>
+                        </router-link>
+                    </li>
                 </div>
                 <div v-else style="display: flex">
                     <li><router-link :class="{'active': currentRouteName == 'Sign Up'}" to="/sign_up">Sign Up</router-link></li>
                     <li><router-link :class="{'active': currentRouteName == 'Login'}" to="/login">Login</router-link></li>
                 </div>
-                <li id="lg-bag"> 
-                    <router-link to="/cart">
-                        <i class="far fa-shopping-bag"></i>
-                    </router-link>
-                </li>
                 <a href="#" id="close" @click="nav" class="fas fa-times"></a>
             </ul>
         </div>
@@ -92,6 +94,7 @@ if (close) {
 .dropdown {
     float: left;
     overflow: hidden;
+    display: flex;
 }
 .dropdown #dropbtn {
     font-size: 16px;
