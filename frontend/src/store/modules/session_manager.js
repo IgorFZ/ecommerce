@@ -128,6 +128,7 @@ const mutations = {
           email: null,
           full_name: null,
         };
+        sessionStorage.clear();
         state.auth_token = null;
         localStorage.removeItem("auth_token");
         axios.defaults.headers.common["Authorization"] = null;

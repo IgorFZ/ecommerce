@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
             order = Order.where(status: 'cart').find_by(user_id: params['user_id'])
             product = Product.find(params[:product_id])
             quantity = params[:quantity]
-            total = (quantity.to_i * product.price.to_f)
+            total = (quantity.to_i * product.price.to_i)
 
             order_items = OrderItem.create(order_id: order.id, product_id: product.id, quantity: quantity)
             Order.update(total: order.total + total)
@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
         else
             product = Product.find(params[:product_id])
             quantity = params[:quantity]
-            total = (quantity.to_i * product.price.to_f)
+            total = (quantity.to_i * product.price.to_i)
 
             order = Order.create(user_id: params[:user_id], status: "cart", total: total)
             order_items = OrderItem.create(order_id: order.id, product_id: product.id, quantity: quantity)

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = "http://127.0.0.1:3000/order"
+const BASE_URL = "http://127.0.0.1:3000/"
 
 const state = {
     cart: []
@@ -19,9 +19,8 @@ const actions = {
         }
         new Promise((resolve, reject) => {
             axios
-            .get(`${BASE_URL}`, config)
+            .get(`${BASE_URL}order`, config)
             .then((response) => {
-                commit("", response);
                 resolve(response.data);
             })
             .catch((error) => {
@@ -32,7 +31,7 @@ const actions = {
     getCartOrder({ commit }, payload) {
         new Promise((resolve, reject) => {
             axios
-            .get(`${BASE_URL}/${payload}`)
+            .get(`${BASE_URL}order/${payload}`)
             .then((response) => {
                 commit("setCart", response);
                 resolve(response.data);
@@ -42,6 +41,19 @@ const actions = {
             });
         });
     },
+    removeItemOrder({ commit }, payload) {
+        new Promise((resolve, reject) => {
+            axios
+            .delete(`${BASE_URL}/order_items/${payload}`)
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+                reject(error);
+            });
+        });
+    }
 }
 
 const mutations = {

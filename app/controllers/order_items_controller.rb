@@ -35,6 +35,10 @@ class OrderItemsController < ApplicationController
   
     # DELETE /order_items/1
     def destroy
+      product = Product.find(@order_item.product_id)
+      order_item_total = (@order_item.quantity).to_i * (product.price).to_i
+      order = Order.find(@order_item.order_id)
+      order.update(total: (order.total - order_item_total))
       @order_item.destroy
     end
   

@@ -20,7 +20,7 @@
                     </thead>
                     <tbody v-if="getCart.product != null">
                         <tr v-for="(item, index) in getCart.order_items">
-                            <td><a href=""><i class="far fa-times-circle"></i></a></td>
+                            <td @click.prevent="removeItemFromCart((getCart['order_items'][index]['id']))"><a href=""><i class="far fa-times-circle"></i></a></td>
                             <td><img :src="getCart['product'][index]['image_url'][0]" alt=""></td>
                             <td> {{ getCart['product'][index]['name'] }} </td>
                             <td>$ {{ formatNumber(getCart['product'][index]['price']) }}</td>
@@ -79,16 +79,21 @@ export default {
         ...mapGetters(["getUserID", "getCart"]),
     },
     methods: {
-        ...mapActions(["getCartOrder", "loginUserWithToken"]),
+        ...mapActions(["getCartOrder", "removeItemOrder"]),
         formatNumber (num) {
             return parseFloat(num/100).toFixed(2)
         },
         loadCart(user_id) {
             this.getCartOrder(user_id);
+        },
+        removeItemFromCart(order_item_id) {
+            this.removeItemOrder(order_item_id);
+            this.loadCart(this.getUserID);
+            
+            
         }
     },
     mounted() {
-        console.log("Passou")
         this.loadCart(this.getUserID);
     },
 }
