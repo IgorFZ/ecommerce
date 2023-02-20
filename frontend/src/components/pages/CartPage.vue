@@ -89,7 +89,7 @@ export default {
         removeItemFromCart(order_item_id) {
             this.removeItemOrder(order_item_id);
             this.loadCart(this.getUserID);
-            
+            setTimeout(function () { window.location.reload() }.bind(this), 300)
             
         }
     },

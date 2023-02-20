@@ -28,76 +28,96 @@
             <span> {{ getProduct['desc'] }} </span>
         </div>
     </section>
+
+    <Modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
+    
 </template>
 
 
 <script>
-import Stars from '../Stars.vue'
-import { mapActions, mapGetters } from 'vuex';
+import Modal from '../Modal.vue';
+import Stars from "../Stars.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-    name: 'Product',
-    props: ["id", "category_id"],
-    data() {
-        return {
-            mainImg: null,
-            imgIndex: 0,
-            quantity: 1,
-            params: {},
-        }
+  name: "Product",
+  props: ["id", "category_id"],
+  data() {
+    return {
+      mainImg: null,
+      imgIndex: 0,
+      quantity: 1,
+      params: {},
+      isModalVisible: false,
+    };
+  },
+  components: {
+    Stars,
+    Modal,
+  },
+  computed: {
+    ...mapGetters(["getProduct", "getCategory", "isLoggedIn", "getUserID"]),
+  },
+  methods: {
+    ...mapActions([
+      "getProductById",
+      "getCategoryById",
+      "addProductToCart",
+      "getCartOrder",
+    ]),
+    loadImage(index) {
+      this.imgIndex = index;
+      this.mainImg = this.getProduct["image_url"][index];
     },
-    components: {
-        Stars,
+    formatNumber(num) {
+      return parseFloat(num / 100).toFixed(2);
     },
-    computed: {
-        ...mapGetters(["getProduct", "getCategory", "isLoggedIn", "getUserID"]),
+    addToCart() {
+      if (this.isLoggedIn) {
+        this.params = {
+          user_id: this.getUserID,
+          product_id: this.getProduct["id"],
+          quantity: this.quantity,
+        };
+        this.addProductToCart(this.params);
+        this.showModal();
+      } else {
+        this.$router.push({ name: "Login" });
+      }
     },
-    methods: {
-        ...mapActions(["getProductById", "getCategoryById", "addProductToCart", "getCartOrder"]),
-        loadImage(index) {
-            this.imgIndex = index
-            this.mainImg = this.getProduct['image_url'][index]
-        },
-        formatNumber (num) {
-            return parseFloat(num/100).toFixed(2)
-        },
-        addToCart() {
-            if (this.isLoggedIn) {
-                this.params = {
-                    user_id: this.getUserID,
-                    product_id: this.getProduct['id'],
-                    quantity: this.quantity,
-                }
-                console.log(this.params)
-                this.addProductToCart(this.params)
-            } else {
-                this.$router.push({ name: 'Login' })
-            }
-        },
+    showModal() {
+        this.isModalVisible = true;
     },
-    mounted() {
-        this.getProductById(this.id);
-        this.getCategoryById(this.category_id);
-    },
-    updated() {
-        this.loadImage(this.imgIndex)
+    closeModal() {
+        this.isModalVisible = false;
     }
-}
+  },
+  mounted() {
+    this.getProductById(this.id);
+    this.getCategoryById(this.category_id);
+  },
+  updated() {
+    this.loadImage(this.imgIndex);
+  },
+};
 </script>
 
 
 <style scoped>
-    #prodetails .single-pro-details h4 {
-	    padding: 40px 0 5px 0;
-    }
-    #prodetails .single-pro-details .star,
-    #prodetails .single-pro-details .brand {
-        font-size: 13px;
-    }
+#prodetails .single-pro-details h4 {
+  padding: 40px 0 5px 0;
+}
 
-    #prodetails .single-pro-details .star {
-        padding: 0px 0px 20px 0px;
-        color: rgb(243, 181, 25);
-    }
+#prodetails .single-pro-details .star,
+#prodetails .single-pro-details .brand {
+  font-size: 13px;
+}
 
+#prodetails .single-pro-details .star {
+  padding: 0px 0px 20px 0px;
+  color: rgb(243, 181, 25);
+}
 </style>
