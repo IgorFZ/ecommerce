@@ -53,6 +53,25 @@ const actions = {
                 reject(error);
             });
         });
+    },
+    checkoutCart({ commit }) {
+        const config = {
+            headers: {
+              authorization: localStorage.auth_token,
+            },
+        };
+        new Promise((resolve, reject) => {
+            axios
+            .get(`${BASE_URL}/checkout`, config)
+            .then((response) => {
+                window.location.href = response.data.url;
+                resolve(response.data);
+            })
+            .catch((error) => {
+                console.log(error)
+                reject(error);
+            });
+        });
     }
 }
 

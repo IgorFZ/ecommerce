@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 
   get '/order', to: 'orders#add_to_cart'
   get '/order/:user_id', to: 'orders#get_user_cart'
+  get '/checkout', to: 'checkout#new'
 end

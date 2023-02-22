@@ -75,9 +75,10 @@ const actions = {
     logoutUser({ commit }) {
         const config = {
           headers: {
-            authorization: state.auth_token,
+            authorization: localStorage.auth_token,
           },
         };
+        console.log(state.auth_token)
         new Promise((resolve, reject) => {
           axios
             .delete(`${BASE_URL}users/sign_out`, config)

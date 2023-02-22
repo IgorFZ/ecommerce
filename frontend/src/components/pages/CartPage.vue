@@ -54,7 +54,7 @@
                             <td><strong>$ {{  formatNumber(getCart.order.total) }} </strong></td>
                         </tr>
                     </table>
-                    <button class="normal">Proceed to checkout</button>
+                    <button @click.prevent="checkout" class="normal">Proceed to checkout</button>
                 </div>
             </section>
         </div>
@@ -76,10 +76,10 @@ export default {
     name: 'Cart',
     props: ["id", "category_id"],
     computed: {
-        ...mapGetters(["getUserID", "getCart"]),
+        ...mapGetters(["getAuthToken", "getUserID", "getCart"]),
     },
     methods: {
-        ...mapActions(["getCartOrder", "removeItemOrder"]),
+        ...mapActions(["getCartOrder", "removeItemOrder", "checkoutCart"]),
         formatNumber (num) {
             return parseFloat(num/100).toFixed(2)
         },
@@ -89,8 +89,10 @@ export default {
         removeItemFromCart(order_item_id) {
             this.removeItemOrder(order_item_id);
             this.loadCart(this.getUserID);
-            setTimeout(function () { window.location.reload() }.bind(this), 300)
-            
+            setTimeout(function () { window.location.reload() }.bind(this), 300)  
+        },
+        checkout() {
+            this.checkoutCart();
         }
     },
     mounted() {
