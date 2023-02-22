@@ -16,7 +16,7 @@ class CheckoutController < ApplicationController
             }
 
             @stripe_checkout_session = Stripe::Checkout::Session.create(
-                customer: 'cus_NORMigENMNs14f',
+                customer: current_user.stripe_customer_id,
                 payment_method_types: ['card'],
                 allow_promotion_codes: true,
                 line_items: items,

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = "http://localhost:3000/"
+const HOME_URL = "http://localhost:5173/"
 
 const state = {
     auth_token: null,
@@ -32,13 +33,12 @@ const getters = {
 
 const actions = {
     registerUser({ commit }, payload) {
-        console.log("Payload:")
-        console.log(payload)
         return new Promise((resolve, reject) => {
           axios
             .post(`${BASE_URL}users`, payload)
             .then((response) => {
               commit("setUserInfoFromToken", response);
+              window.location.href = HOME_URL;
               resolve(response);
             })
             .catch((error) => {
