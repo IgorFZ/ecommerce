@@ -2,8 +2,8 @@ class OrdersController < ApplicationController
     #before_action :authenticate_user!
 
     def add_to_cart
-        if Order.exists?(user_id: params[:user_id]) && (Order.where(status: 'cart').find_by(user_id: params['user_id'])).present?
-            order = Order.where(status: 'cart').find_by(user_id: params['user_id'])
+        if Order.exists?(user_id: current_user.id) && (Order.where(status: 'cart').find_by(user_id: current_user.id)).present?
+            order = Order.where(status: 'cart').find_by(user_id: current_user.id)
             product = Product.find(params[:product_id])
             quantity = params[:quantity]
             total = (quantity.to_i * product.price.to_i)
@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
             quantity = params[:quantity]
             total = (quantity.to_i * product.price.to_i)
 
-            order = Order.create(user_id: params[:user_id], status: "cart", total: total)
+            order = Order.create(user_id: current_user.id, status: "cart", total: total)
             order_items = OrderItem.create(order_id: order.id, product_id: product.id, quantity: quantity)
             render json: {
                 message: "Order Created",
@@ -30,8 +30,8 @@ class OrdersController < ApplicationController
     end
 
     def get_user_cart
-        if Order.exists?(user_id: params[:user_id]) && (Order.where(status: 'cart').find_by(user_id: params['user_id'])).present?
-            order = Order.where(status: 'cart').find_by(user_id: params['user_id'])
+        if Order.exists?(user_id: current_user.id) && (Order.where(status: 'cart').find_by(user_id: current_user.id)).present?
+            order = Order.where(status: 'cart').find_by(user_id: current_user.id)
             order_items = OrderItem.where(order_id: order.id)
             x = 0
             product = Array.new

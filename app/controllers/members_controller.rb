@@ -17,9 +17,9 @@ class MembersController < ApplicationController
     end
 
     def update_info 
-        @user = User.find(params[:id])
+        current_user = get_user_from_token
+        @user = User.find(current_user.id)
         update = @user.update(user_params)
-        @user = get_user_from_token
         if update
             render json: {
                 message: "Update Successufully",

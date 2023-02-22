@@ -9,9 +9,9 @@ Rails.application.routes.draw do
                registrations: 'users/registrations'
              }
   get '/member-data', to: 'members#current_user'
-  put '/users/:id', to: 'members#update_info'
+  put '/users/edit', to: 'members#update_info'
 
   get '/order', to: 'orders#add_to_cart'
-  get '/order/:user_id', to: 'orders#get_user_cart'
+  get '/cart', to: 'orders#get_user_cart'
   get '/checkout', to: 'checkout#new'
 end

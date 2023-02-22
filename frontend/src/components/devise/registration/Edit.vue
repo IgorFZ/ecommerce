@@ -3,7 +3,7 @@
         <h3>Update Your Account</h3>
         <div id="login-details">
             <form @submit="editUser" class="login-form">
-                <label for="email">Full Name:</label>
+                <label for="name">Full Name:</label>
                 <input class="input-form" type="name" v-model="full_name" />
                 <input type="submit" value="Update" class="button-form" />
             </form>
@@ -30,16 +30,13 @@ export default {
         ...mapActions(["editUserInfo"]),
         editUser(event) {
             event.preventDefault();
-            if (this.email != "" && this.password != "" && this.password != "") {
-                var user_id = this.getUserID;
+            if (this.full_name != "") {
                 let data = {
-                    id: user_id,
                     user: {
                         full_name: this.full_name,
                     },
                 };
                 this.editUserInfo(data)
-                this.getUserID;
             } else {
                 alert('Invalid Fields!');
             }

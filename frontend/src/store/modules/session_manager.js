@@ -3,6 +3,12 @@ import axios from 'axios';
 const BASE_URL = "http://localhost:3000/"
 const HOME_URL = "http://localhost:5173/"
 
+const AUTH = {
+  headers: {
+    authorization: localStorage.auth_token,
+  },
+};
+
 const state = {
     auth_token: null,
     user: {
@@ -47,9 +53,17 @@ const actions = {
         });
     },
     editUserInfo({ commit }, payload) {
+      const config = {
+        headers: {
+            authorization: localStorage.auth_token,
+        },
+        user: {
+          full_name: payload.user.full_name
+        }
+      };
       return new Promise((resolve, reject) => {
         axios
-          .put(`${BASE_URL}users/${payload.id}`, payload)
+          .put(`${BASE_URL}users/edit`, config)
           .then((response) => {
             commit("setUserInfoFromToken", response);
             resolve(response);
@@ -73,15 +87,9 @@ const actions = {
         });
     },
     logoutUser({ commit }) {
-        const config = {
-          headers: {
-            authorization: localStorage.auth_token,
-          },
-        };
-        console.log(state.auth_token)
         new Promise((resolve, reject) => {
           axios
-            .delete(`${BASE_URL}users/sign_out`, config)
+            .delete(`${BASE_URL}users/sign_out`, AUTH)
             .then(() => {
               commit("resetUserInfo");
               resolve();

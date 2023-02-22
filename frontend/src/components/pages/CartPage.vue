@@ -79,16 +79,16 @@ export default {
         ...mapGetters(["getAuthToken", "getUserID", "getCart"]),
     },
     methods: {
-        ...mapActions(["getCartOrder", "removeItemOrder", "checkoutCart"]),
+        ...mapActions(["getUserCart", "removeItemOrder", "checkoutCart"]),
         formatNumber (num) {
             return parseFloat(num/100).toFixed(2)
         },
-        loadCart(user_id) {
-            this.getCartOrder(user_id);
+        loadCart() {
+            this.getUserCart();
         },
         removeItemFromCart(order_item_id) {
             this.removeItemOrder(order_item_id);
-            this.loadCart(this.getUserID);
+            this.loadCart();
             setTimeout(function () { window.location.reload() }.bind(this), 300)  
         },
         checkout() {
@@ -96,7 +96,7 @@ export default {
         }
     },
     mounted() {
-        this.loadCart(this.getUserID);
+        this.loadCart();
     },
 }
 </script>
