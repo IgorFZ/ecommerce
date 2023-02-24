@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :products
   resources :categories
+  resources :webhooks, only: [:create]
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
