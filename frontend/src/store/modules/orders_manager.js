@@ -9,12 +9,16 @@ const AUTH = {
 };
 
 const state = {
-    cart: []
+    cart: [],
+    orders: []
 }
 
 const getters = {
     getCart(state) {
         return state.cart;
+    },
+    getOrders(state) {
+        return state.orders;
     },
 }
 
@@ -28,7 +32,7 @@ const actions = {
         }
         new Promise((resolve, reject) => {
             axios
-            .get(`${BASE_URL}order`, config)
+            .get(`${BASE_URL}add`, config)
             .then((response) => {
                 resolve(response.data);
             })
@@ -74,12 +78,29 @@ const actions = {
                 reject(error);
             });
         });
-    }
+    },
+    getUserOrders({ commit }) {
+        new Promise((resolve, reject) => {
+            axios
+            .get(`${BASE_URL}orders`, AUTH)
+            .then((response) => {
+                commit("setOrders", response);
+                console.log(response.data)
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+        });
+    },
 }
 
 const mutations = {
     setCart(state, data) {
         state.cart = data.data;
+    },
+    setOrders(state, data) {
+        state.orders = data.data;
     },
 }
 

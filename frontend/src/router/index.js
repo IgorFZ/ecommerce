@@ -7,6 +7,7 @@ import Product from '../components/pages/ProductPage.vue'
 import About from '../components/pages/AboutPage.vue'
 import Contact from '../components/pages/ContactPage.vue'
 import Cart from '../components/pages/CartPage.vue'
+import Orders from '../components/pages/OrdersPage.vue'
 
 import Login from '../components/devise/session/Login.vue'
 import SignUp from '../components/devise/registration/SignUp.vue'
@@ -34,6 +35,8 @@ const routes = [
     { path: '/contact', name: 'Contact', component: Contact },
     
     { path: '/cart', name: 'Cart', component: Cart },
+
+    { path: '/orders', name: 'Orders', component: Orders },
 ]
 
 const router = createRouter({

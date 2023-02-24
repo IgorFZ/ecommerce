@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get '/member-data', to: 'members#current_user'
   put '/users/edit', to: 'members#update_info'
 
-  get '/order', to: 'orders#add_to_cart'
+  get '/add', to: 'orders#add_to_cart'
   get '/cart', to: 'orders#get_user_cart'
+  get '/orders', to: 'orders#get_user_orders'
+
   get '/checkout', to: 'checkout#new'
 end
