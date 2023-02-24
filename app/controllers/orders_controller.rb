@@ -57,6 +57,7 @@ class OrdersController < ApplicationController
             orders = Order.joins(:order_items => :product)
                 .where(status: ['paid', 'shipped', 'finished'])
                 .select('orders.id, products.id as product_id, products.name, products.price, order_items.quantity, orders.status, orders.total')
+                .order('orders.id ASC')
 
             order_id = -1
             order = nil
@@ -103,6 +104,7 @@ class OrdersController < ApplicationController
                         }]
                     )
                     index += 1
+                    order_id = item.id
                 end
             end
 
