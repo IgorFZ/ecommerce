@@ -54,3 +54,8 @@ end
 gem "devise", "~> 4.8"
 gem "devise-jwt", "~> 0.10.0"
 gem "rack-cors", "~> 2.0"
+
+gem "stripe"
+
+gem 'net-http'
+gem 'uri', '0.10.0'

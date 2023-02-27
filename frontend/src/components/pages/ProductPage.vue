@@ -78,7 +78,6 @@ export default {
     addToCart() {
       if (this.isLoggedIn) {
         this.params = {
-          user_id: this.getUserID,
           product_id: this.getProduct["id"],
           quantity: this.quantity,
         };

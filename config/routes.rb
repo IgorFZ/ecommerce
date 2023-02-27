@@ -3,14 +3,19 @@ Rails.application.routes.draw do
   resources :posts
   resources :products
   resources :categories
+  resources :webhooks, only: [:create]
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
                registrations: 'users/registrations'
              }
   get '/member-data', to: 'members#current_user'
-  put '/users/:id', to: 'members#update_info'
+  put '/users/edit', to: 'members#update_info'
 
-  get '/order', to: 'orders#add_to_cart'
-  get '/order/:user_id', to: 'orders#get_user_cart'
+  get '/add', to: 'orders#add_to_cart'
+  get '/cart', to: 'orders#get_user_cart'
+  get '/orders', to: 'orders#get_user_orders'
+
+  get '/checkout', to: 'checkout#new'
+  get '/coupon', to: 'checkout#check_coupon'
 end

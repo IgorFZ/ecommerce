@@ -12,9 +12,13 @@
                     <div>
                         <li><router-link class="dropbtn" to="/">Hello, {{ (this.getUserName).split(' ')[0] }}</router-link></li>
                         <div class="dropdown-content">
+                            <router-link to="/orders">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Orders</span>
+                            </router-link>
                             <router-link to="/edit">
                                 <i class="fas fa-user-edit"></i>
-                                <span>Edit Account</span>
+                                <span>Account</span>
                             </router-link>
                             <router-link to="/">
                                 <i class="far fa-times-circle"></i>
@@ -145,7 +149,8 @@ if (close) {
 
 .fas,
 .far{
-    width: 20px;
+    width: 25px;
+    font-size: 15px
 }
 
 </style>

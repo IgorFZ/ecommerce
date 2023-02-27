@@ -34,8 +34,12 @@
                 <div id="coupon">
                     <h3>Apply Coupon</h3>
                     <div>
-                        <input type="text" placeholder="Enter Your Coupon">
-                        <button class="normal">Apply</button>
+                        <input v-model="coupon" style="text-transform: uppercase" type="text" placeholder="Enter Your Coupon">
+                        <button @click.prevent="applyCoupon()" class="normal">Apply</button>
+                    </div>
+                    <div id=coupon-alert v-if="getCoupon.code != null">
+                        <span coupon-applied >Coupon Applied!</span>
+                        <span @click="removeDiscount" class="remove">Remove</span>
                     </div>
                 </div>
                 <div id="subtotal">
@@ -45,16 +49,25 @@
                             <td>Cart Subtotal</td>
                             <td>$ {{  formatNumber(getCart.order.total) }}</td>
                         </tr>
+                        <tr v-if="getCoupon.amount_off != null && getCoupon.amount_off != 0">
+                            <td>Discount</td>
+                            <td>$ {{ formatNumber(getCoupon.amount_off) }}</td>
+                        </tr>
+                        <tr v-else>
+                            <td>Discount</td>
+                            <td>$ {{ formatNumber(getCart.order.total * (getCoupon.percent_off/100.0)) }}</td>
+                        </tr>
                         <tr>
                             <td>Shipping</td>
                             <td>Free</td>
                         </tr>
                         <tr>
                             <td><strong>Total</strong></td>
-                            <td><strong>$ {{  formatNumber(getCart.order.total) }} </strong></td>
+                            <td v-if="getCoupon.amount_off != null && getCoupon.amount_off != 0"><strong>$ {{  formatNumber(getCart.order.total-getCoupon.amount_off) }} </strong></td>
+                            <td v-else><strong>$ {{  formatNumber(getCart.order.total - (getCart.order.total * (getCoupon.percent_off/100.0))) }} </strong></td>
                         </tr>
                     </table>
-                    <button class="normal">Proceed to checkout</button>
+                    <button @click="checkout" class="normal">Proceed to checkout</button>
                 </div>
             </section>
         </div>
@@ -75,27 +88,51 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'Cart',
     props: ["id", "category_id"],
+    data() {
+        return {
+            coupon: null,
+            params: {},
+        }
+    },
     computed: {
-        ...mapGetters(["getUserID", "getCart"]),
+        ...mapGetters(["getAuthToken", "getUserID", "getCart", "getCoupon"]),
     },
     methods: {
-        ...mapActions(["getCartOrder", "removeItemOrder"]),
+        ...mapActions(["getUserCart", "removeItemOrder", "checkoutCart", "checkCoupon", "removeCoupon"]),
         formatNumber (num) {
             return parseFloat(num/100).toFixed(2)
         },
-        loadCart(user_id) {
-            this.getCartOrder(user_id);
+        loadCart() {
+            this.getUserCart();
         },
         removeItemFromCart(order_item_id) {
             this.removeItemOrder(order_item_id);
-            this.loadCart(this.getUserID);
-            setTimeout(function () { window.location.reload() }.bind(this), 300)
-            
-        }
+            this.loadCart();
+            setTimeout(function () { window.location.reload() }.bind(this), 300)  
+        },
+        checkout() {
+            this.params = {
+                promo_code: this.getCoupon.stripe_promotion_code,
+            }
+            this.checkoutCart(this.params);
+        },
+        applyCoupon() {
+            this.params = {
+                promo_code: this.coupon.toUpperCase(),
+            }
+            this.checkCoupon(this.params);
+            this.coupon = null;
+        },
+        removeDiscount() {
+            this.removeCoupon();
+        },
     },
     mounted() {
-        this.loadCart(this.getUserID);
+        this.loadCart();
     },
+    beforeDestroy() {
+        this.removeCoupon();
+    }
 }
 </script>
 
@@ -116,5 +153,23 @@ export default {
     .not-found span {
         font-size: 15px;
         color: black;
+    }
+    #coupon-alert {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+        width: 200px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #077069;
+    }
+    #coupon-alert .remove {
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    #coupon-alert .remove:hover {
+        color: red;
     }
 </style>

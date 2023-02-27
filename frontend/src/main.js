@@ -13,5 +13,8 @@ if (cookieExists) {
         store.dispatch("loginUserWithToken", { auth_token });
     }
 }
+else {
+    store.dispatch("resetInfo");
+}
 
 createApp(App).use(router).use(store).mount('#app')

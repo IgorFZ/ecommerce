@@ -17,9 +17,9 @@ class MembersController < ApplicationController
     end
 
     def update_info 
-        @user = User.find(params[:id])
+        current_user = get_user_from_token
+        @user = User.find(current_user.id)
         update = @user.update(user_params)
-        @user = get_user_from_token
         if update
             render json: {
                 message: "Update Successufully",
@@ -42,6 +42,8 @@ class MembersController < ApplicationController
         user_id = jwt_payload[0]['sub']
         User.find(user_id.to_s)
     end
+
+
 
     def user_params
         params.require(:user).permit(:full_name)

@@ -4,7 +4,7 @@
         <div id="login-details">
             <form @submit="onSignUp" class="login-form">
                 <label for="email">Full Name:</label>
-                <input class="input-form" type="name" v-model="fullName" />
+                <input class="input-form" type="name" v-model="full_name" />
                 <label for="email">Email:</label>
                 <input class="input-form" type="email" v-model="email" />
                 <label for="password">Password:</label>
@@ -35,7 +35,7 @@ export default {
     name: 'SignUp',
     data() {
         return {
-            fullName: "",
+            full_name: "",
             email: "",
             password: "",
         }
@@ -44,16 +44,14 @@ export default {
         ...mapActions(["registerUser"]),
         onSignUp(event) {
             event.preventDefault();
-            if (this.email != "" && this.password != "" && this.fullName != "") {
+            if (this.email != "" && this.password != "" && this.full_name != "") {
                 let data = {
                     user: {
-                        full_name: this.fullName,
+                        full_name: this.full_name,
                         email: this.email,
                         password: this.password,
                     },
                 };
-                console.log("DATA:")
-                console.log(data)
                 this.registerUser(data);
                 this.resetData();
             } else {
@@ -61,8 +59,9 @@ export default {
             }
         },
         resetData() {
-            this.signUpEmail = "";
-            this.signUpPassword = "";
+            this.full_name = "";
+            this.email = "";
+            this.password = "";
         },
     }
 }
