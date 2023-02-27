@@ -44,7 +44,7 @@ const actions = {
             .post(`${BASE_URL}users`, payload)
             .then((response) => {
               commit("setUserInfoFromToken", response);
-              window.location.href = HOME_URL;
+              window.location.href = HOME_URL + 'login';
               resolve(response);
             })
             .catch((error) => {

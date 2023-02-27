@@ -38,7 +38,7 @@ class CheckoutController < ApplicationController
                     mode: 'payment',
                     metadata: {order_id: order.id},
                     allow_promotion_codes: true,
-                    success_url: YOUR_DOMAIN,
+                    success_url: YOUR_DOMAIN + 'orders',
                     cancel_url: YOUR_DOMAIN + 'cart',
                 )
             end
