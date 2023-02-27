@@ -79,6 +79,7 @@ const actions = {
             .post(`${BASE_URL}users/sign_in`, payload)
             .then((response) => {
                 commit("setUserInfo", response);
+                window.location.href = HOME_URL;
                 resolve(response);
             })
             .catch((error) => {
@@ -92,6 +93,7 @@ const actions = {
             .delete(`${BASE_URL}users/sign_out`, AUTH)
             .then(() => {
               commit("resetUserInfo");
+              window.location.href = HOME_URL;
               resolve();
             })
             .catch((error) => {
