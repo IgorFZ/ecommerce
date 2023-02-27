@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get '/orders', to: 'orders#get_user_orders'
 
   get '/checkout', to: 'checkout#new'
+  get '/coupon', to: 'checkout#check_coupon'
 end
