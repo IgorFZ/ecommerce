@@ -93,6 +93,7 @@ const actions = {
             .delete(`${BASE_URL}users/sign_out`, AUTH)
             .then(() => {
               commit("resetUserInfo");
+              window.localStorage.clear();
               window.location.href = HOME_URL;
               resolve();
             })
@@ -102,24 +103,27 @@ const actions = {
         });
     },
     loginUserWithToken({ commit }, payload) {
-        const config = {
-          headers: {
-            authorization: payload.auth_token,            
-          },
-        };
-        new Promise((resolve, reject) => {
-          axios
-            .get(`${BASE_URL}member-data`, config)
-            .then((response) => {
-              commit("setUserInfoFromToken", response);
-              resolve(response);
-            })
-            .catch((error) => {
-              commit("resetUserInfo");
-              reject(error);
-            });
-        });
-      },
+      const config = {
+        headers: {
+          authorization: payload.auth_token,            
+        },
+      };
+      new Promise((resolve, reject) => {
+        axios
+          .get(`${BASE_URL}member-data`, config)
+          .then((response) => {
+            commit("setUserInfoFromToken", response);
+            resolve(response);
+          })
+          .catch((error) => {
+            commit("resetUserInfo");
+            reject(error);
+          });
+      });
+    },
+    resetInfo( {commit} ) {
+      commit("resetUserInfo");
+    }
 }
 
 const mutations = {

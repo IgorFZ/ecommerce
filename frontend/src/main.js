@@ -8,10 +8,14 @@ let localAuthToken = localStorage.auth_token;
 let cookieExists = localAuthToken != "undefined" && localAuthToken != null;
 if (cookieExists) {
     const auth_token = localStorage.getItem("auth_token");
+    console.log(auth_token)
     const authTokenExists = auth_token !== "undefined" && auth_token !== null;
     if (authTokenExists) {
         store.dispatch("loginUserWithToken", { auth_token });
     }
+}
+else {
+    store.dispatch("resetInfo");
 }
 
 createApp(App).use(router).use(store).mount('#app')
