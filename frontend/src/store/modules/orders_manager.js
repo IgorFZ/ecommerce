@@ -10,7 +10,14 @@ const AUTH = {
 
 const state = {
     cart: [],
-    orders: []
+    orders: [],
+    coupon: {
+        id: null,
+        code: null,
+        stripe_coupon_id: null,
+        amount_off: null,
+        percent_off: null,
+    },
 }
 
 const getters = {
@@ -20,6 +27,9 @@ const getters = {
     getOrders(state) {
         return state.orders;
     },
+    getCoupon(state) {
+        return state.coupon;
+    }
 }
 
 const actions = {
@@ -50,6 +60,8 @@ const actions = {
                 resolve(response.data);
             })
             .catch((error) => {
+                commit("setCart", response);
+                resolve(response.data);
                 reject(error);
             });
         });
@@ -66,10 +78,16 @@ const actions = {
             });
         });
     },
-    checkoutCart({ commit }) {
+    checkoutCart({ commit }, payload) {
+        const config = {
+            headers: {
+                authorization: localStorage.auth_token
+            },
+            params: payload,
+        }
         new Promise((resolve, reject) => {
             axios
-            .get(`${BASE_URL}/checkout`, AUTH)
+            .get(`${BASE_URL}/checkout`, config)
             .then((response) => {
                 window.location.href = response.data.url;
                 resolve(response.data);
@@ -79,13 +97,46 @@ const actions = {
             });
         });
     },
+    checkCoupon( { commit }, payload){
+        const config = {
+            params: payload,
+        }
+        new Promise((resolve, reject) => {
+            axios
+            .get(`${BASE_URL}/coupon`, config)
+            .then((response) => {
+                if (response.data.coupon != null) {
+                    commit("setCoupon", response);    
+                }
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+        });
+    },
+
+    removeCoupon({ commit }) {
+        const response = {
+            data: {
+                coupon: {
+                    id: null,
+                    code: null,
+                    stripe_coupon_id: null,
+                    amount_off: null,
+                    percent_off: null,
+                }
+            }
+        }
+        commit("setCoupon", response);
+    },
+
     getUserOrders({ commit }) {
         new Promise((resolve, reject) => {
             axios
             .get(`${BASE_URL}orders`, AUTH)
             .then((response) => {
                 commit("setOrders", response);
-                console.log(response.data)
                 resolve(response.data);
             })
             .catch((error) => {
@@ -101,6 +152,10 @@ const mutations = {
     },
     setOrders(state, data) {
         state.orders = data.data;
+    },
+    setCoupon(state, data) {
+        console.log(data.data)
+        state.coupon = data.data.coupon;
     },
 }
 

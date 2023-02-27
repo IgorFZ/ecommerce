@@ -43,6 +43,8 @@ class MembersController < ApplicationController
         User.find(user_id.to_s)
     end
 
+
+
     def user_params
         params.require(:user).permit(:full_name)
     end
