@@ -2,11 +2,11 @@
     <section>
         <form @submit.prevent="$emit('search', this.search)" class="search-form">
             <div v-if="filterAdvancedActive" class="advanced-filter">
-                <select class="select-filter radius-5-left" v-model="search.direction" name="" id="">
+                <select class="select-filter radius-5-left" @click.prevent="$emit('search', this.search)" v-model="search.direction" name="" id="">
                     <option value="desc">Desc</option>
                     <option value="asc">Asc</option>
                 </select>
-                <select class="select-filter radius-5-right" v-model="search.mode" name="" id="">
+                <select class="select-filter radius-5-right" @click.prevent="$emit('search', this.search)" v-model="search.mode" name="" id="">
                     <option value="stars">Rating</option>
                     <option value="name">Name</option>
                     <option value="price">Price</option>
