@@ -1,6 +1,6 @@
 <template lang="">
     <section id="header">
-        <a href="#"><img :src="logoLink" class="logo" alt="Store Tek Logo"></a> 
+        <a href="#"><img src="../../assets/img/logo.png" class="logo" alt="Cara Logo"></a> 
         <div>
             <ul id="navbar" v-bind:class="{ active: isActive }">
                 <li><router-link :class="{'active': currentRouteName == 'Home'}" to="/">Home</router-link></li>

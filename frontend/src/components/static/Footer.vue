@@ -1,7 +1,7 @@
 <template lang="">
     <footer class="section-p1">
         <div class="col">
-            <img class="logo" :src="logoLink" alt="Logo">
+            <img class="logo" src="../../assets/img/logo.png" alt="Logo">
             <h4>Contact</h4>
             <p><strong>Address: </strong>562 Wellington Road, Street 32, San Francisco</p>
             <p><strong>Phone: </strong>+01 2222 365 / (+91) 01 2345 6789</p>
@@ -39,11 +39,11 @@
             <h4>Install App</h4>
             <p>From App Store or Google Play</p>
             <div class="row">
-                <a href="https://www.apple.com/br/app-store/" target="_blank"><img :src="appleLink" alt=""></a>
-                <a href="https://play.google.com/store" target="_blank"><img :src="googleLink" alt=""></a>
+                <a href="https://www.apple.com/br/app-store/" target="_blank"><img src="../../assets/img/pay/app.jpg" alt=""></a>
+                <a href="https://play.google.com/store" target="_blank"><img src="../../assets/img/pay/play.jpg" alt=""></a>
             </div>
             <p>Secure Pagament Gateways</p>
-            <img :src="pagamentLink" alt="">
+            <img src="../../assets/img/pay/app.jpg" alt="">
         </div>
 
         <div class="copyright">
@@ -54,17 +54,8 @@
 
 
 <script>
-export default {
-    data() {
-        return {
-            logoLink: '/src/assets/img/logo.png',
-            appleLink: '/src/assets/img/pay/app.jpg',
-            googleLink: '/src/assets/img/pay/play.jpg',
-            pagamentLink: '/src/assets/img/pay/pay.png'
-        }
-    }
-}
 </script>
+
 <style lang="">
     
 </style>
