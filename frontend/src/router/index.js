@@ -54,6 +54,10 @@ router.beforeEach((to, from, next) => {
         next({ name: 'Home' });
     } else if ((to.name === 'Edit') && (isAuthenticated === false)){
         next({ name: 'Login' })
+    } else if ((to.name === 'Cart') && (isAuthenticated === false)){
+        next({ name: 'Login' })
+    } else if ((to.name === 'Orders') && (isAuthenticated === false)){
+        next({ name: 'Login' })
     } else {
         next()
     }
