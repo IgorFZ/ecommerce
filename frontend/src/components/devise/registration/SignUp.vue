@@ -54,6 +54,7 @@ export default {
                 };
                 this.registerUser(data);
                 this.resetData();
+                this.$router.push("/login");
             } else {
                 alert('Invalid Fields!');
             }

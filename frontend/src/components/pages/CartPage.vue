@@ -114,6 +114,7 @@ export default {
             this.params = {
                 promo_code: this.getCoupon.stripe_promotion_code,
             }
+            this.removeCoupon();
             this.checkoutCart(this.params);
         },
         applyCoupon() {
