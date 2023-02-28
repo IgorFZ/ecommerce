@@ -59,3 +59,5 @@ gem "stripe"
 
 gem 'net-http'
 gem 'uri', '0.10.0'
+
+gem 'sprockets-rails'

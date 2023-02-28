@@ -1,5 +1,6 @@
 require_relative "boot"
 
+require "sprockets/railtie"
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -23,6 +24,8 @@ module Ecommerce
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    config.assets.initialize_on_precompile = false
+
     # This also configures session_options for use below
     config.session_store :cookie_store, key: '_interslice_session'
 
@@ -33,6 +36,7 @@ module Ecommerce
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
 
+    config.active_storage.variant_processor = :mini_magick
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

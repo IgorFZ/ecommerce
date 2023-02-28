@@ -2,7 +2,7 @@ class CheckoutController < ApplicationController
     # before_action :authenticate_user!
 
     Stripe.api_key = Rails.application.credentials[:stripe][:secret]
-    YOUR_DOMAIN = 'http://localhost:5173/'
+    YOUR_DOMAIN = 'https://vite-frontend-production-321f.up.railway.app/'
 
     def new
         current_user = get_user_from_token
@@ -64,8 +64,6 @@ class CheckoutController < ApplicationController
     end
 
     def check_coupon
-        puts "##########"
-        puts(params)
         if Coupon.find_by(code: params['promo_code']).present?
             coupon = Coupon.find_by(code: params['promo_code'])
             result = Stripe::PromotionCode.retrieve(coupon.stripe_promotion_code)
