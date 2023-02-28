@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = "http://127.0.0.1:3000/"
+const BASE_URL = "https://ecommerce-production-b3c9.up.railway.app/"
 
 const state = {
     product: [],

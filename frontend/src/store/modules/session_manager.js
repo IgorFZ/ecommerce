@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:3000/"
-const HOME_URL = "http://localhost:5173/"
+const BASE_URL = "https://ecommerce-production-b3c9.up.railway.app/"
+const HOME_URL = "https://vite-frontend-production-321f.up.railway.app/"
 
 const AUTH = {
   headers: {
@@ -44,7 +44,6 @@ const actions = {
             .post(`${BASE_URL}users`, payload)
             .then((response) => {
               commit("setUserInfoFromToken", response);
-              window.location.href = HOME_URL + 'login';
               resolve(response);
             })
             .catch((error) => {
@@ -79,7 +78,7 @@ const actions = {
             .post(`${BASE_URL}users/sign_in`, payload)
             .then((response) => {
                 commit("setUserInfo", response);
-                window.location.href = HOME_URL;
+                location.href = HOME_URL;
                 resolve(response);
             })
             .catch((error) => {
@@ -93,8 +92,8 @@ const actions = {
             .delete(`${BASE_URL}users/sign_out`, AUTH)
             .then(() => {
               commit("resetUserInfo");
-              window.localStorage.clear();
-              window.location.href = HOME_URL;
+              localStorage.clear();
+              location.href = HOME_URL;
               resolve();
             })
             .catch((error) => {

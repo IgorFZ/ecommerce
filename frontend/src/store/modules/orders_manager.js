@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = "http://127.0.0.1:3000/"
+const BASE_URL = "https://ecommerce-production-b3c9.up.railway.app/"
 
 const AUTH = {
     headers: {
@@ -87,7 +87,7 @@ const actions = {
         }
         new Promise((resolve, reject) => {
             axios
-            .get(`${BASE_URL}/checkout`, config)
+            .get(`${BASE_URL}checkout`, config)
             .then((response) => {
                 window.location.href = response.data.url;
                 resolve(response.data);
@@ -103,7 +103,7 @@ const actions = {
         }
         new Promise((resolve, reject) => {
             axios
-            .get(`${BASE_URL}/coupon`, config)
+            .get(`${BASE_URL}coupon`, config)
             .then((response) => {
                 if (response.data.coupon != null) {
                     commit("setCoupon", response);    
